@@ -1,20 +1,34 @@
-# Visual Studio Code-Ready Template Project for RP2040 using Picoprobe
+# MES Week 9 Optimizations
 
-A template project for quick-starting C-based RP2040 Raspberry Pi Pico projects in Visual Studio Code, using the picoprobe programmer.
+I implemented four methods for doing integer division with remainder.
 
-## Prerequisites
+Some worked better than others...
 
-This assumes that 
-1. You have already installed OpenOCD with picoprobe, according to the steps in [Getting Started](https://datasheets.raspberrypi.org/pico/getting-started-with-pico.pdf), Appendix A
-2. Your VSCode has already been configured according to the steps [here](https://shawnhymel.com/2096/how-to-set-up-raspberry-pi-pico-c-c-toolchain-on-windows-with-vs-code/)
-3. You have installed the picoprobe uf2 to one Pico, and it is connected to the other Pico with the correct wiring (refer again to Appendix A).
+I tested everything with a numerator of 5000 and denominator of 3 for comparison.
 
-## Usage
+## Methods
 
-1. Make a project directory in your pico-sdk parent directory (usually `~/pico`, with sdk at `~/pico/pico-sdk`), e.g. make `~/pico/my-project`.
-2. Press [Use this template], or, download this template as a zip.
-3. Clone your repository/Unzip the downloaded folder to your new project directory.
-4. Write whatever you want in main.c, add more files, go wild...
+- Method 1 is 27 assembly instructions, and 22 bytes in flash.  This method executed in 11 us.
+    - The smallest, and the second fastest algorithm. 
+    - Good candidate for a balance of code size and speed  
+- Method 2 is 38 assembly instructions, and 22 bytes in flash.  This method executed in 178 us
+    - One of the smallest, but the slowest of all algorithms
+- Method 3 is 26 assembly instructions and 26 bytes in flash.  This method executed in 5 us
+    - The fastest, but not the smallest algorithm
+    - Good for when speed is key.
+- Method 4 is 45 assembly instructions and 34 bytes in flash.  This method executed in 113 us.
+    - Large and takes a while, but not the slowest
+
+## Reference
+
+### Execution Times
+
+![Compare](MethodsComparision.png "Execution Times")
+
+### Map File Info
+
+![mapFile](mapFile.png)
+
 
 
 
